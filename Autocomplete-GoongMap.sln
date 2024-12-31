@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autocomplete-GoongMap", "Autocomplete-GoongMap\Autocomplete-GoongMap.csproj", "{CF3D5C44-9F06-47E1-8784-42D3E3F39778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoongService", "GooongService\GoongService.csproj", "{D1F88F6D-89DD-4F5A-B06E-0730275BFA12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF3D5C44-9F06-47E1-8784-42D3E3F39778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3D5C44-9F06-47E1-8784-42D3E3F39778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3D5C44-9F06-47E1-8784-42D3E3F39778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3D5C44-9F06-47E1-8784-42D3E3F39778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F88F6D-89DD-4F5A-B06E-0730275BFA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F88F6D-89DD-4F5A-B06E-0730275BFA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F88F6D-89DD-4F5A-B06E-0730275BFA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F88F6D-89DD-4F5A-B06E-0730275BFA12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACDC4194-D273-47D5-BD38-0E7F03F55759}
+	EndGlobalSection
+EndGlobal
