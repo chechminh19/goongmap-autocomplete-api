@@ -1,32 +1,36 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using static System.Net.WebRequestMethods;
 
 namespace GoongService
 {
-    //private readonly HttpClient _httpClient;
-    //public class GoongMapService(HttpClient httpClient)
-    //{
-    //    _httpClient = httpClient;
-    //}
-    //public async Task<string> GetAutocompleteResults(string query, double? latitude = null, double? longitude = null)
-    //{
-    //    var url = "https://rsapi.goong.io/place/autocomplete?input=aqua&location=10.700920276971795%2C%20106.73296613898738&limit=10&radius=10&api_key={YOUR_API_KEY}" + query;
+    public class GoongMapService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly string _apiKey;
+        public GoongMapService(IConfiguration configuration, HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+            _apiKey = configuration["GoongMap:ApiKey"];
+        }
+        // limit: index, radius: area(km), compound: true-detail address, false-not
+        public async Task<string> GetAutocompleteResults(string query, int limit = 5, int radius = 50, bool moreCompound = false)
+        {
+            
+            var url = $"https://rsapi.goong.io/place/autocomplete?input={query}&limit={limit}&radius={radius}&more_compound={moreCompound}&api_key={_apiKey}";
 
-    //    if (latitude.HasValue && longitude.HasValue)
-    //    {
-    //        url += "&location=" + latitude.Value + "," + longitude.Value;
-    //    }
+            var response = await _httpClient.GetAsync(url);
 
-    //    var response = await _httpClient.GetAsync(url);
-
-    //    if (response.IsSuccessStatusCode)
-    //    {
-    //        return await response.Content.ReadAsStringAsync();
-    //    }
-    //    else
-    //    {
-    //        throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
-    //    }
-    //}
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
+            }
+        }
+    }
 }
 
