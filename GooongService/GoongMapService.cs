@@ -37,6 +37,7 @@ namespace GoongService
                 throw new Exception($"Error calling Autocomplete API: {response.ReasonPhrase}");
             }
         }
+        // change address to location latlng
         public async Task<ForwardGeocodeDTOResponse> ForwardGeocode(string address)
         {
             var url = $"https://rsapi.goong.io/geocode?address={address}&api_key={_apiKey}";
@@ -52,6 +53,7 @@ namespace GoongService
                 throw new Exception($"Error calling ForwardGeocode API: {response.ReasonPhrase}");
             }
         }
+        // change latlng to location address
         public async Task<ForwardGeocodeDTOResponse> ReverseGeocode(string latlng)
         {
             var url = $"https://rsapi.goong.io/geocode?latlng={latlng}&api_key={_apiKey}";

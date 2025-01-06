@@ -14,7 +14,14 @@ namespace Autocomplete_GoongMap.Controllers
         {
             _goongMapService = goongMapService;
         }
-
+        /// <summary>
+        /// Get addresses on query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="limit"></param>
+        /// <param name="radius"></param>
+        /// <param name="moreCompound"></param>
+        /// <returns></returns>
         [HttpGet("autocomplete")]
         public async Task<IActionResult> Autocomplete([FromQuery] string query, [FromQuery] int? limit, [FromQuery] int? radius, [FromQuery] bool moreCompound = false)
         {
@@ -28,6 +35,11 @@ namespace Autocomplete_GoongMap.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        /// <summary>
+        /// Change address to location-latlng
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         [HttpGet("forward-geocode")]
         public async Task<IActionResult> ForwardGeocode([FromQuery] string address)
         {
@@ -41,6 +53,11 @@ namespace Autocomplete_GoongMap.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        /// <summary>
+        /// Change location-latlng to address
+        /// </summary>
+        /// <param name="latlng"></param>
+        /// <returns></returns>
         [HttpGet("reverse-geocode")]
         public async Task<IActionResult> ReverseGeocode([FromQuery] string latlng)
         {
