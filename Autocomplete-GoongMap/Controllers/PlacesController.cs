@@ -41,5 +41,20 @@ namespace Autocomplete_GoongMap.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet("reverse-geocode")]
+        public async Task<IActionResult> ReverseGeocode([FromQuery] string latlng)
+        {
+            try
+            {
+                var results = await _goongMapService.ReverseGeocode(latlng);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
     }
 }

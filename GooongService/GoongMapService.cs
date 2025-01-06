@@ -34,7 +34,7 @@ namespace GoongService
             }
             else
             {
-                throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
+                throw new Exception($"Error calling Autocomplete API: {response.ReasonPhrase}");
             }
         }
         public async Task<ForwardGeocodeDTOResponse> ForwardGeocode(string address)
@@ -49,10 +49,24 @@ namespace GoongService
             }
             else
             {
-                throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
+                throw new Exception($"Error calling ForwardGeocode API: {response.ReasonPhrase}");
             }
         }
-
+        public async Task<ForwardGeocodeDTOResponse> ReverseGeocode(string latlng)
+        {
+            var url = $"https://rsapi.goong.io/geocode?latlng={latlng}&api_key={_apiKey}";
+            var response = await _httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                // read response JSON from ReverseGeocode API
+                var responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ForwardGeocodeDTOResponse>(responseData);
+            }
+            else
+            {
+                throw new Exception($"Error calling ForwardGeocode API: {response.ReasonPhrase}");
+            }
+        }
 
     }
 }
