@@ -1,6 +1,8 @@
 ﻿using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using static System.Net.WebRequestMethods;
 
 namespace GoongService
@@ -15,7 +17,7 @@ namespace GoongService
             _apiKey = configuration["GoongMap:ApiKey"];
         }
         // limit: index, radius: area(km), compound: true-detail address, false-not
-        public async Task<string> GetAutocompleteResults(string query, int limit = 5, int radius = 50, bool moreCompound = false)
+        public async Task<AutocompleteResponseDto> GetAutocompleteResults(string query, int? limit, int? radius, bool moreCompound = false)
         {
             
             var url = $"https://rsapi.goong.io/place/autocomplete?input={query}&limit={limit}&radius={radius}&more_compound={moreCompound}&api_key={_apiKey}";
@@ -24,7 +26,11 @@ namespace GoongService
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                //return await response.Content.ReadAsStringAsync();
+
+                // Đọc kết quả JSON từ Goong API
+                var responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<AutocompleteResponseDto>(responseData);
             }
             else
             {

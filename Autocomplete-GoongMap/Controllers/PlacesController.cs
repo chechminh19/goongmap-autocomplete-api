@@ -16,7 +16,7 @@ namespace Autocomplete_GoongMap.Controllers
         }
 
         [HttpGet("autocomplete")]
-        public async Task<IActionResult> Autocomplete([FromQuery] string query, [FromQuery] int limit = 10, [FromQuery] int radius = 50, [FromQuery] bool moreCompound = false)
+        public async Task<IActionResult> Autocomplete([FromQuery] string query, [FromQuery] int? limit, [FromQuery] int? radius, [FromQuery] bool moreCompound = false)
         {
             try
             {
