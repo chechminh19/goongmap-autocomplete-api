@@ -28,5 +28,18 @@ namespace Autocomplete_GoongMap.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet("forward-geocode")]
+        public async Task<IActionResult> ForwardGeocode([FromQuery] string address)
+        {
+            try
+            {
+                var results = await _goongMapService.ForwardGeocode(address);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

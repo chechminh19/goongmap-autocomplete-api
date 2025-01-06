@@ -28,7 +28,7 @@ namespace GoongService
             {
                 //return await response.Content.ReadAsStringAsync();
 
-                // Đọc kết quả JSON từ Goong API
+                // read response JSON from Autocomplete API
                 var responseData = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<AutocompleteResponseDto>(responseData);
             }
@@ -37,6 +37,23 @@ namespace GoongService
                 throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
             }
         }
+        public async Task<ForwardGeocodeDTOResponse> ForwardGeocode(string address)
+        {
+            var url = $"https://rsapi.goong.io/geocode?address={address}&api_key={_apiKey}";
+            var response = await _httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                // read response JSON from ForwardGeocode API
+                var responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ForwardGeocodeDTOResponse>(responseData);
+            }
+            else
+            {
+                throw new Exception($"Error calling Goong API: {response.ReasonPhrase}");
+            }
+        }
+
+
     }
 }
 
