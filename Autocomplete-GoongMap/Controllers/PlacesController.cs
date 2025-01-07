@@ -23,11 +23,11 @@ namespace Autocomplete_GoongMap.Controllers
         /// <param name="moreCompound"></param>
         /// <returns></returns>
         [HttpGet("autocomplete")]
-        public async Task<IActionResult> Autocomplete([FromQuery] string query, [FromQuery] int? limit, [FromQuery] int? radius, [FromQuery] bool moreCompound = false)
+        public async Task<IActionResult> Autocomplete([FromQuery] string query, [FromQuery] string location ,[FromQuery] int? limit, [FromQuery] int? radius, [FromQuery] bool moreCompound = false)
         {
             try
             {
-                var results = await _goongMapService.GetAutocompleteResults(query, limit, radius, moreCompound);
+                var results = await _goongMapService.GetAutocompleteResults(query, location,limit, radius, moreCompound);
                 return Ok(results);
             }
             catch (Exception ex)
